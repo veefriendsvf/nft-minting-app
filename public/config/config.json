@@ -1,16 +1,16 @@
 {
-  "CONTRACT_ADDRESS": "0x0b18b900F7375AABDa00EEaC988116C33fb05BD2",
-  "SCAN_LINK": "https://polygonscan.com/token/0x0b18b900F7375AABDa00EEaC988116C33fb05BD2",
+  "CONTRACT_ADDRESS": "0xcfc592D42dC450F68f928B95E956E38b32d2f2d1",
+  "SCAN_LINK": "https://polygonscan.com/address/0xcfc592D42dC450F68f928B95E956E38b32d2f2d1",
   "NETWORK": {
     "NAME": "Polygon",
     "SYMBOL": "Matic",
     "ID": 137
   },
-  "NFT_NAME": "The Stripes NFT",
-  "SYMBOL": "TSNFT",
-  "MAX_SUPPLY": 992,
-  "WEI_COST": 4000000000000000000,
-  "DISPLAY_COST": 4,
+  "NFT_NAME": "VEEFRIENDS",
+  "SYMBOL": "VEE",
+  "MAX_SUPPLY": 5000,
+  "WEI_COST": 10000000000000000,
+  "DISPLAY_COST": 0.01,
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
   "MARKETPLACE_LINK": "https://opensea.io/collection/the-stripes-nft",
