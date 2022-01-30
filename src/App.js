@@ -243,7 +243,7 @@ function App() {
                 color: "var(--accent-text)",
               }}
             >
-              {data.totalCountDone} / {CONFIG.MAX_SUPPLY}
+              {data.totalCountDone - 1} / {CONFIG.MAX_SUPPLY}
             </s.TextTitle>
             <s.TextDescription
               style={{
