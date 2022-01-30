@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { connect } from "./redux/blockchain/blockchainActions";
-import { fetchData } from "./redux/data/dataActions";
+import { fetchData, CountApiCall } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
 
@@ -101,6 +101,7 @@ function App() {
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
   const [mintAmount, setMintAmount] = useState(1);
+  const [defaultCount, setDefaultCount] = useState(data.totalSupply)
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
@@ -185,9 +186,21 @@ function App() {
     SET_CONFIG(config);
   };
 
+  const updateTimestamp = () => {
+    setTimeout(() => {
+      setDefaultCount(parseInt(defaultCount) + 1);
+    }, 5000) 
+  }
+
+
   useEffect(() => {
     getConfig();
   }, []);
+
+  useEffect(() => {
+    updateTimestamp();
+    dispatch(CountApiCall())
+  }, [defaultCount]);
 
   useEffect(() => {
     getData();
@@ -230,7 +243,7 @@ function App() {
                 color: "var(--accent-text)",
               }}
             >
-              1376/5000
+              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
             </s.TextTitle>
             <s.TextDescription
               style={{
