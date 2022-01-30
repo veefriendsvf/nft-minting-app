@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { connect } from "./redux/blockchain/blockchainActions";
-import { fetchData, CountApiCall } from "./redux/data/dataActions";
+import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
 
@@ -101,7 +101,6 @@ function App() {
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
   const [mintAmount, setMintAmount] = useState(1);
-  const [defaultCount, setDefaultCount] = useState(data.totalSupply)
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
@@ -146,7 +145,8 @@ function App() {
       .then((receipt) => {
         console.log(receipt);
         setFeedback(
-          `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
+          `WOW, the ${CONFIG.NFT_NAME} is yours! go visit 
+          sea.io to view it.`
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
@@ -186,21 +186,9 @@ function App() {
     SET_CONFIG(config);
   };
 
-  const updateTimestamp = () => {
-    setTimeout(() => {
-      setDefaultCount(parseInt(defaultCount) + 3);
-    }, 60000) 
-  }
-
-
   useEffect(() => {
     getConfig();
   }, []);
-
-  useEffect(() => {
-    updateTimestamp();
-    dispatch(CountApiCall())
-  }, [defaultCount]);
 
   useEffect(() => {
     getData();
@@ -243,7 +231,7 @@ function App() {
                 color: "var(--accent-text)",
               }}
             >
-              {data.totalCountDone - 1} / {CONFIG.MAX_SUPPLY}
+              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
             </s.TextTitle>
             <s.TextDescription
               style={{
@@ -251,7 +239,9 @@ function App() {
                 color: "var(--primary-text)",
               }}
             >
-              
+              <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
+                {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
+              </StyledLink>
             </s.TextDescription>
             <span
               style={{
