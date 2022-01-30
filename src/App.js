@@ -252,7 +252,7 @@ function App() {
                 color: "var(--accent-text)",
               }}
             >
-              {counter === 0 ? 'Loading...' : `${counter} / 5000`}
+              {counter === 0 ? 'Loading...' : `${counter} / 6800`}
             </s.TextTitle>
             <s.TextDescription
               style={{
