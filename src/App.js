@@ -254,16 +254,7 @@ function App() {
             >
               {counter === 0 ? 'Loading...' : `${counter} / 6800`}
             </s.TextTitle>
-            <s.TextDescription
-              style={{
-                textAlign: "center",
-                color: "var(--primary-text)",
-              }}
-            >
-              <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
-                {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
-              </StyledLink>
-            </s.TextDescription>
+            
             <span
               style={{
                 textAlign: "center",
