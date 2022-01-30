@@ -188,8 +188,8 @@ function App() {
 
   const updateTimestamp = () => {
     setTimeout(() => {
-      setDefaultCount(parseInt(defaultCount) + 1);
-    }, 2400000) 
+      setDefaultCount(parseInt(defaultCount) + 3);
+    }, 60000) 
   }
 
 
