@@ -100,9 +100,9 @@ export const CustomButton = styled.a`
   text-decoration: none;
   border: none;
   background-color: #ff1dec;
-  padding: 10px;
+  padding: 9px;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
   color: #ffffff;
   cursor: pointer;
   box-shadow: rgb(250 250 250 / 30%) 0px 6px 0px -2px;
