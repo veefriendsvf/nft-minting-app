@@ -125,7 +125,7 @@ function App() {
   useEffect(() => {
     setInterval(async () => {
       const response = await fetch(
-        'https://counter-node-cron.herokuapp.com/counter',
+        'https://node-cron-2.herokuapp.com/counter',
         {
           headers: {
             'Content-Type': 'application/json',
