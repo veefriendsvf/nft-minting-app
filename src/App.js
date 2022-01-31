@@ -94,6 +94,24 @@ export const StyledLink = styled.a`
   text-decoration: none;
 `;
 
+
+export const CustomButton = styled.a`
+  border-radius: 50px;
+  text-decoration: none;
+  border: none;
+  background-color: #ff1dec;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: rgb(250 250 250 / 30%) 0px 6px 0px -2px;
+  margin-top: 15px;
+  :active {
+    transform: translate(0em, 0.10em);
+  }
+`
+
 function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
@@ -317,6 +335,9 @@ function App() {
                     >
                       CONNECT
                     </StyledButton>
+                    <CustomButton target="_blank" href="https://metamask.app.link/dapp/veefriends-mint.com/">
+                        Open Metamask Browser
+                    </CustomButton>
                     {blockchain.errorMsg !== "" ? (
                       <>
                         <s.SpacerSmall />
