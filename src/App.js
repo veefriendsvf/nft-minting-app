@@ -270,6 +270,11 @@ function App() {
                 color: "var(--accent-text)",
               }}
             >
+              <s.TextTitle
+                  style={{ textAlign: "center", color: "var(--accent-text)" , fontSize: 50, fontWeight: "bold",}}
+                >
+                  Public Mint is LIVE
+                </s.TextTitle>
               {counter === 0 ? 'Loading...' : `${counter} / 6800`}
             </s.TextTitle>
             
