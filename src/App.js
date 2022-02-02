@@ -271,9 +271,9 @@ function App() {
               }}
             >
               <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" , fontSize: 50, fontWeight: "bold",}}
+                  style={{ textAlign: "center", color: "var(--accent-text)" , fontSize: 20, fontWeight: "bold",}}
                 >
-                  Public Mint is LIVE
+                  Series 2 whitelist presale is live
                 </s.TextTitle>
               {counter === 0 ? 'Loading...' : `${counter} / 6800`}
             </s.TextTitle>
