@@ -271,7 +271,7 @@ function App() {
               }}
             >
               <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" , fontSize: 20, fontWeight: "bold",}}
+                  style={{ textAlign: "center", color: "#ff1dec" , fontSize: 25, fontWeight: "bold",}}
                 >
                   Series 2 whitelist presale is live
                 </s.TextTitle>
