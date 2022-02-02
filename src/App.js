@@ -275,7 +275,7 @@ function App() {
                 >
                   Series 2 whitelist presale is live
                 </s.TextTitle>
-              {counter === 0 ? 'Loading...' : `${counter} / 6800`}
+              {counter === 0 ? 'Loading...' : `${counter} / 5000`}
             </s.TextTitle>
             
             <span
