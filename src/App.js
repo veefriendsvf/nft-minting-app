@@ -99,7 +99,7 @@ export const CustomButton = styled.a`
   border-radius: 50px;
   text-decoration: none;
   border: none;
-  background-color: #ff1dec;
+  background-color: #40993f;
   padding: 9px;
   font-weight: bold;
   font-size: 16px;
@@ -271,7 +271,7 @@ function App() {
               }}
             >
               <s.TextTitle
-                  style={{ textAlign: "center", color: "#ff1dec" , fontSize: 25, fontWeight: "bold",}}
+                  style={{ textAlign: "center", color: "#40993f" , fontSize: 25, fontWeight: "bold",}}
                 >
                   Series 2 whitelist presale is live
                 </s.TextTitle>
