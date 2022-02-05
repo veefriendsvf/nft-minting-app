@@ -59,7 +59,7 @@ export const ResponsiveWrapper = styled.div`
   flex-direction: column;
   justify-content: stretched;
   align-items: stretched;
-  width: 73%;
+  width: 80%;
   @media (min-width: 767px) {
     flex-direction: row;
   }
