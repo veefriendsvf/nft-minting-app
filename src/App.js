@@ -4,6 +4,9 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
+import OwlCarousel from 'react-owl-carousel';  
+import 'owl.carousel/dist/assets/owl.carousel.css';  
+import 'owl.carousel/dist/assets/owl.theme.default.css';  
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -12,7 +15,7 @@ export const StyledButton = styled.button`
   padding: 10px;
   border-radius: 50px;
   border: none;
-  background-color: #40993f;
+  background-color: var(--secondary);
   padding: 10px;
   font-weight: bold;
   color: var(--secondary-text);
@@ -32,7 +35,7 @@ export const StyledRoundButton = styled.button`
   padding: 10px;
   border-radius: 100%;
   border: none;
-  background-color: #40993f;
+  background-color: var(--primary);
   padding: 10px;
   font-weight: bold;
   font-size: 15px;
@@ -59,51 +62,29 @@ export const ResponsiveWrapper = styled.div`
   flex-direction: column;
   justify-content: stretched;
   align-items: stretched;
-  width: 1000;
+  width: 80%;
   @media (min-width: 767px) {
-    flex-direction: row;
+    flex-direction: centre;
   }
 `;
 
 export const StyledLogo = styled.img`
-  width: 200px;
+  width: 100px;
   @media (min-width: 767px) {
-    width: 300px;
+    width: 150px;
   }
   transition: width 0.5s;
   transition: height 0.5s;
 `;
-
-export const StyledImg = styled.img`
-  box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
-  border: 4px dashed #40993f;
-  background-color: #40993f;
-  border-radius: 100%;
-  width: 200px;
-  @media (min-width: 900px) {
-    width: 250px;
-  }
-  @media (min-width: 1000px) {
-    width: 300px;
-  }
-  transition: width 0.5s;
-`;
-
-export const StyledLink = styled.a`
-  color: #40993f;
-  text-decoration: none;
-`;
-
-
 export const CustomButton = styled.a`
   border-radius: 50px;
   text-decoration: none;
   border: none;
-  background-color: #40993f;
+  background-color: var(--secondary);
   padding: 9px;
   font-weight: bold;
   font-size: 16px;
-  color: #ffffff;
+  color: var(--secondary-text);
   cursor: pointer;
   box-shadow: rgb(250 250 250 / 30%) 0px 6px 0px -2px;
   margin-top: 15px;
@@ -111,6 +92,26 @@ export const CustomButton = styled.a`
     transform: translate(0em, 0.10em);
   }
 `
+export const StyledImg = styled.img`
+  box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
+  border: 3px Solid var(--secondary);
+  background-color: var(--accent);
+  border-radius: 100%;
+  width: 200px;
+  @media (min-width: 900px) {
+    width: 300px;
+  }
+  @media (min-width: 1000px) {
+    width: 350px;
+  }
+  transition: width 0.5s;
+`;
+
+export const StyledLink = styled.a`
+  color: var(--secondary);
+  text-decoration: none;
+`;
+
 
 function App() {
   const dispatch = useDispatch();
@@ -137,7 +138,7 @@ function App() {
     MARKETPLACE_LINK: "",
     SHOW_BACKGROUND: false,
   });
-  
+
   const [counter, setCounter] = useState(0);
   
   useEffect(() => {
@@ -169,7 +170,7 @@ function App() {
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
-      .mint(blockchain.account, mintAmount)
+      .mint(mintAmount)
       .send({
         gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
@@ -184,8 +185,7 @@ function App() {
       .then((receipt) => {
         console.log(receipt);
         setFeedback(
-          `WOW, the ${CONFIG.NFT_NAME} is yours! go visit 
-          sea.io to view it.`
+          `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
@@ -202,8 +202,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 50) {
-      newMintAmount = 50;
+    if (newMintAmount > 10) {
+      newMintAmount = 10;
     }
     setMintAmount(newMintAmount);
   };
@@ -225,6 +225,15 @@ function App() {
     SET_CONFIG(config);
   };
 
+  const [matches,setMatches] = React.useState(window.matchMedia("(min-width: 768px)").matches)
+
+  React.useEffect(() => {
+      const handler = e => setMatches(e.matches);
+      window.matchMedia("(min-width: 768px)").addEventListener('change', handler)
+      window.scrollTo(0,0)
+  },[])
+
+
   useEffect(() => {
     getConfig();
   }, []);
@@ -239,31 +248,33 @@ function App() {
         flex={1}
         ai={"center"}
         style={{ padding: 24, backgroundColor: "var(--primary)" }}
-        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
+        image={CONFIG.SHOW_BACKGROUND ? "/config/images/banner-bg.jpg" : null}
       >
-        <a href={CONFIG.MARKETPLACE_LINK}>
-          <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
-        </a>
+        {/* { <div className="container text-center">
+          <img alt={"logo"} src={"/config/images/bg-final.png"} style={{width:'100%',borderRadius:20,borderColor:"#000",borderWidth:20}} />
+        </div> } */}
         <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
-         
+          {/* <s.Container flex={2} jc={"center"} ai={"center"}>
+            <StyledImg alt={"example"} src={"/config/images/example.gif"} />
+          </s.Container> */}
           <s.SpacerLarge />
           <s.Container
-            flex={2}
+            flex={10}
             jc={"center"}
             ai={"center"}
             style={{
               backgroundColor: "var(--accent)",
               padding: 24,
               borderRadius: 24,
-              border: "4px dashed #40993f",
+              border: "3px Solid var(--secondary)",
               boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
             <s.TextTitle
               style={{
                 textAlign: "center",
-                fontSize: 29,
+                fontSize: 50,
                 fontWeight: "bold",
                 color: "var(--accent-text)",
               }}
@@ -275,15 +286,14 @@ function App() {
                 </s.TextTitle>
               {counter === 0 ? 'Loading...' : `${counter} / 5000`}
             </s.TextTitle>
-            
-            <span
+            <s.TextDescription
               style={{
                 textAlign: "center",
+                color: "var(--primary-text)",
               }}
             >
-              
-              
-            </span>
+            
+            </s.TextDescription>
             <s.SpacerSmall />
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
@@ -338,7 +348,7 @@ function App() {
                     >
                       CONNECT
                     </StyledButton>
-                    <CustomButton target="_blank" href="https://metamask.app.link/dapp/veefriends-mint.com/">
+                    <CustomButton target="_blank" href="https://metamask.app.link/dapp/veefriendsmini.com/">
                         Open Metamask Browser
                     </CustomButton>
                     {blockchain.errorMsg !== "" ? (
@@ -417,28 +427,74 @@ function App() {
             <s.SpacerMedium />
           </s.Container>
           <s.SpacerLarge />
-
+          <s.Container flex={1} jc={"center"} ai={"center"}>
+            {/* <StyledImg
+              alt={"example"}
+              src={"/config/images/example.gif"}
+              style={{ transform: "scaleX(-1)" }}
+            /> */}
+          </s.Container>
         </ResponsiveWrapper>
         <s.SpacerMedium />
         <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
-          <s.TextDescription
+          {/* <s.TextDescription
             style={{
               textAlign: "center",
               color: "var(--primary-text)",
             }}
           >
-            
-          </s.TextDescription>
+            Please make sure you are connected to the right network (
+            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. Please note:
+            Once you make the purchase, you cannot undo this action.
+          </s.TextDescription> */}
           <s.SpacerSmall />
-          <s.TextDescription
+          {/* <s.TextDescription
             style={{
               textAlign: "center",
               color: "var(--primary-text)",
             }}
           >
-            
-          </s.TextDescription>
+            We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
+            successfully mint your NFT. We recommend that you don't lower the
+            gas limit.
+          </s.TextDescription> */}
         </s.Container>
+        <div class="container slider" style={{padding: "0vw 0vw"}}>
+          <OwlCarousel items={matches == false ? 2 : 5}  
+              className="owl-theme"  
+              loop={true}
+              autoplay={true}
+              nav
+              margin={5} >  
+              <div>
+                <img  className="img" src= {"slider/1.jpg"} style={{borderRadius:'35px',border:'3px solid #ffffff'}}/>
+              </div>
+              <div>
+                <img  className="img" src= {"slider/2.jpg"} style={{borderRadius:'35px',border:'3px solid #ffffff'}}/>
+              </div>
+              <div>
+                <img  className="img" src= {"slider/3.jpg"} style={{borderRadius:'35px',border:'3px solid #ffffff'}}/>
+              </div>
+              <div>
+                <img  className="img" src= {"slider/4.jpg"} style={{borderRadius:'35px',border:'3px solid #ffffff'}}/>  
+              </div>
+              <div>
+                <img  className="img" src= {"slider/5.jpg"} style={{borderRadius:'35px',border:'3px solid #ffffff'}}/>
+              </div>
+              <div>
+                <img  className="img" src= {"slider/6.jpg"} style={{borderRadius:'35px',border:'3px solid #ffffff'}}/>
+              </div>
+              <div>
+                <img  className="img" src= {"slider/7.jpg"} style={{borderRadius:'35px',border:'3px solid #ffffff'}}/>
+              </div>
+              <div>
+                <img  className="img" src= {"slider/8.jpg"} style={{borderRadius:'35px',border:'3px solid #ffffff'}}/>
+              </div>
+              <div>
+                <img  className="img" src= {"slider/9.jpg"} style={{borderRadius:'35px',border:'3px solid #ffffff'}}/>
+              </div>
+          </OwlCarousel>  
+        </div>
       </s.Container>
     </s.Screen>
   );
